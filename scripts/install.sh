@@ -44,7 +44,8 @@ check_raspberry_pi() {
         return
     fi
     
-    MODEL=$(cat /proc/device-tree/model)
+    # Remove null bytes from model string
+    MODEL=$(tr -d '\0' < /proc/device-tree/model)
     print_msg "📍 Detected: ${MODEL}" "${GREEN}"
 }
 
