@@ -1,0 +1,38 @@
+# PiBox5 Default Settings
+# Diese Datei dient als Referenz für alle verfügbaren Einstellungen.
+# Benutzer-Einstellungen werden in ~/.config/pibox5/settings.yaml gespeichert.
+
+ui:
+  theme: "default"           # "default" oder "dark"
+  fullscreen: true           # Vollbildmodus
+  show_settings_button: true # Zahnrad-Icon anzeigen
+  button_size: 150           # Foto-Button Durchmesser (Pixel)
+  countdown_font_size: 200   # Countdown-Schriftgröße (Pixel)
+  blur_radius: 20            # Blur-Stärke für Idle-Vorschau
+
+timing:
+  countdown_seconds: 3       # Countdown-Dauer (1-10 Sekunden)
+  review_seconds: 5          # Review-Anzeige-Dauer (1-30 Sekunden)
+  idle_timeout_minutes: 0    # Idle-Timeout in Minuten (0 = deaktiviert)
+
+camera:
+  use_dummy: false           # Dummy-Kamera für Tests
+  iso: "auto"                # ISO-Wert: "auto", "100", "200", "400", "800", "1600"
+  aperture: "auto"           # Blende: f-Wert oder "auto"
+  shutter_speed: "auto"      # Verschlusszeit oder "auto"
+  image_quality: "large_fine" # JPEG-Qualität
+  capture_target: "memory"   # "memory" (RAM) oder "card" (SD-Karte)
+  preview_fps: 10            # Live-Vorschau Ziel-FPS
+
+upload:
+  enabled: false             # Upload aktivieren
+  url: ""                    # REST-API Endpoint URL
+  api_key: ""                # API-Key für Authentifizierung
+  upload_on_capture: true    # Automatischer Upload nach Aufnahme
+  retry_count: 3             # Anzahl Wiederholungsversuche
+  timeout_seconds: 30        # Upload-Timeout in Sekunden
+
+storage:
+  save_locally: true         # Lokal speichern
+  photos_dir: "~/Pictures/PiBox5"  # Speicherort für Fotos
+  filename_pattern: "photo_{timestamp}.jpg"  # Dateinamenmuster

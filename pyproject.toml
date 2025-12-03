@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pibox5"
+version = "1.0.0"
+description = "Modern Photo Booth Application for Raspberry Pi 5 with Canon DSLR support"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "PiBox5 Team"}
+]
+keywords = ["photobooth", "raspberry-pi", "gphoto2", "canon", "pyqt6"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Graphics :: Capture",
+]
+dependencies = [
+    "PyQt6>=6.5.0",
+    "PyQt6-Qt6>=6.5.0",
+    "gphoto2>=2.5.0",
+    "Pillow>=10.0.0",
+    "requests>=2.31.0",
+    "PyYAML>=6.0",
+    "opencv-python-headless>=4.8.0",
+    "numpy>=1.24.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-qt>=4.2.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+pibox5 = "pibox5.main:main"
+
+[project.urls]
+Homepage = "https://github.com/marion909/PiBox5"
+Repository = "https://github.com/marion909/PiBox5"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pibox5*"]
+
+[tool.setuptools.package-data]
+pibox5 = ["ui/themes/*.qss", "config/*.yaml"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4"]
+ignore = ["E501"]
