@@ -22,9 +22,9 @@ class UISettings:
     theme: str = "default"  # "default" or "dark"
     fullscreen: bool = True
     show_settings_button: bool = True
-    button_size: int = 150  # Photo button diameter in pixels
-    countdown_font_size: int = 200  # Countdown number font size
-    blur_radius: int = 20  # Blur radius for idle preview
+    button_size: int = 120  # Photo button diameter in pixels (optimized for 800x480)
+    countdown_font_size: int = 140  # Countdown number font size (optimized for 800x480)
+    blur_radius: int = 15  # Blur radius for idle preview
 
 
 @dataclass

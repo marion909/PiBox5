@@ -73,11 +73,11 @@ class ReviewScreen(QWidget):
         self.message_label.setStyleSheet("""
             QLabel {
                 color: white;
-                font-size: 32px;
+                font-size: 22px;
                 font-weight: bold;
                 background-color: rgba(46, 204, 113, 0.9);
-                padding: 20px 40px;
-                border-radius: 15px;
+                padding: 12px 25px;
+                border-radius: 10px;
             }
         """)
         

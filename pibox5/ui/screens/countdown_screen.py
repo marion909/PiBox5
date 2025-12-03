@@ -69,11 +69,11 @@ class CountdownScreen(QWidget):
         self.hint_label.setStyleSheet("""
             QLabel {
                 color: rgba(255, 255, 255, 0.9);
-                font-size: 28px;
+                font-size: 20px;
                 font-weight: bold;
                 background-color: rgba(0, 0, 0, 0.5);
-                padding: 15px 30px;
-                border-radius: 10px;
+                padding: 8px 20px;
+                border-radius: 8px;
             }
         """)
         

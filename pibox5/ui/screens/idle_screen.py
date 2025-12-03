@@ -72,16 +72,16 @@ class IdleScreen(QWidget):
         )
         self.photo_button.clicked_signal.connect(self._on_photo_click)
         
-        # Settings button (top-right corner)
+        # Settings button (top-right corner) - optimized for 800x480
         self.settings_button = QPushButton("⚙", self.container)
-        self.settings_button.setFixedSize(50, 50)
+        self.settings_button.setFixedSize(40, 40)
         self.settings_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.settings_button.setStyleSheet("""
             QPushButton {
                 background-color: rgba(255, 255, 255, 0.2);
                 border: none;
-                border-radius: 25px;
-                font-size: 24px;
+                border-radius: 20px;
+                font-size: 20px;
                 color: white;
             }
             QPushButton:hover {
@@ -103,9 +103,9 @@ class IdleScreen(QWidget):
         self.hint_label.setStyleSheet("""
             QLabel {
                 color: rgba(255, 255, 255, 0.7);
-                font-size: 18px;
+                font-size: 14px;
                 background-color: transparent;
-                padding: 10px;
+                padding: 5px;
             }
         """)
     
@@ -126,11 +126,11 @@ class IdleScreen(QWidget):
         self.photo_button.move(btn_x, btn_y)
         
         # Position settings button in top-right corner
-        self.settings_button.move(width - 60, 10)
+        self.settings_button.move(width - 50, 8)
         
         # Position hint at bottom
-        hint_height = 40
-        self.hint_label.setGeometry(0, height - hint_height - 20, width, hint_height)
+        hint_height = 30
+        self.hint_label.setGeometry(0, height - hint_height - 10, width, hint_height)
     
     def update_preview(self, frame: np.ndarray, blur: bool = True):
         """

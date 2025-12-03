@@ -57,10 +57,10 @@ class SettingsScreen(QWidget):
     
     def _setup_ui(self):
         """Initialize the user interface."""
-        # Main layout
+        # Main layout - optimized for 800x480
         main_layout = QVBoxLayout(self)
-        main_layout.setContentsMargins(25, 20, 25, 20)
-        main_layout.setSpacing(20)
+        main_layout.setContentsMargins(10, 8, 10, 8)
+        main_layout.setSpacing(8)
         
         # Header with gradient background
         header_container = QWidget()
@@ -76,11 +76,11 @@ class SettingsScreen(QWidget):
         
         header = QLabel("⚙️ Einstellungen")
         header.setStyleSheet("""
-            font-size: 32px;
+            font-size: 22px;
             font-weight: bold;
             color: white;
             background: transparent;
-            padding: 15px;
+            padding: 8px;
         """)
         header.setAlignment(Qt.AlignmentFlag.AlignCenter)
         header_layout.addWidget(header)
@@ -96,26 +96,26 @@ class SettingsScreen(QWidget):
         self._create_camera_tab()
         self._create_upload_tab()
         
-        # Button row with modern styling
+        # Button row with modern styling - optimized for 800x480
         button_container = QWidget()
         button_container.setStyleSheet("background: transparent;")
         button_layout = QHBoxLayout(button_container)
-        button_layout.setSpacing(20)
-        button_layout.setContentsMargins(0, 10, 0, 0)
+        button_layout.setSpacing(15)
+        button_layout.setContentsMargins(0, 5, 0, 0)
         
-        self.cancel_button = QPushButton("✕  Abbrechen")
+        self.cancel_button = QPushButton("✕ Abbrechen")
         self.cancel_button.setObjectName("cancelButton")
-        self.cancel_button.setMinimumHeight(60)
-        self.cancel_button.setMinimumWidth(180)
+        self.cancel_button.setMinimumHeight(40)
+        self.cancel_button.setMinimumWidth(120)
         self.cancel_button.clicked.connect(self._on_cancel)
         button_layout.addWidget(self.cancel_button)
         
         button_layout.addStretch()
         
-        self.save_button = QPushButton("✓  Speichern")
+        self.save_button = QPushButton("✓ Speichern")
         self.save_button.setObjectName("saveButton")
-        self.save_button.setMinimumHeight(60)
-        self.save_button.setMinimumWidth(180)
+        self.save_button.setMinimumHeight(40)
+        self.save_button.setMinimumWidth(120)
         self.save_button.clicked.connect(self._on_save)
         button_layout.addWidget(self.save_button)
         
@@ -144,40 +144,40 @@ class SettingsScreen(QWidget):
         content = QWidget()
         content.setStyleSheet("background: transparent;")
         content_layout = QVBoxLayout(content)
-        content_layout.setSpacing(20)
-        content_layout.setContentsMargins(5, 10, 5, 10)
+        content_layout.setSpacing(10)
+        content_layout.setContentsMargins(3, 5, 3, 5)
         
         # Timing group
-        timing_group = QGroupBox("⏱️ Zeiteinstellungen")
+        timing_group = QGroupBox("⏱️ Zeit")
         timing_group.setStyleSheet("""
             QGroupBox {
-                font-size: 20px;
+                font-size: 13px;
                 font-weight: bold;
                 color: #ffffff;
                 background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
                     stop:0 rgba(15, 52, 96, 0.9), stop:1 rgba(22, 33, 62, 0.9));
                 border: 2px solid rgba(233, 69, 96, 0.4);
-                border-radius: 15px;
-                margin-top: 25px;
-                padding: 20px 15px 15px 15px;
+                border-radius: 8px;
+                margin-top: 16px;
+                padding: 8px 8px 8px 8px;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
-                left: 20px;
-                padding: 5px 15px;
+                left: 10px;
+                padding: 2px 8px;
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
                     stop:0 #e94560, stop:1 #ff6b6b);
-                border-radius: 8px;
+                border-radius: 5px;
             }
             QLabel {
-                font-size: 16px;
+                font-size: 12px;
                 color: #ffffff;
                 background: transparent;
             }
         """)
         timing_layout = QFormLayout(timing_group)
-        timing_layout.setSpacing(18)
-        timing_layout.setContentsMargins(20, 30, 20, 20)
+        timing_layout.setSpacing(8)
+        timing_layout.setContentsMargins(10, 20, 10, 10)
         
         # Countdown seconds
         self.countdown_spin = QSpinBox()
@@ -194,36 +194,36 @@ class SettingsScreen(QWidget):
         content_layout.addWidget(timing_group)
         
         # UI group
-        ui_group = QGroupBox("🎨 Oberfläche")
+        ui_group = QGroupBox("🎨 UI")
         ui_group.setStyleSheet("""
             QGroupBox {
-                font-size: 20px;
+                font-size: 13px;
                 font-weight: bold;
                 color: #ffffff;
                 background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
                     stop:0 rgba(15, 52, 96, 0.9), stop:1 rgba(22, 33, 62, 0.9));
                 border: 2px solid rgba(46, 204, 113, 0.4);
-                border-radius: 15px;
-                margin-top: 25px;
-                padding: 20px 15px 15px 15px;
+                border-radius: 8px;
+                margin-top: 16px;
+                padding: 8px 8px 8px 8px;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
-                left: 20px;
-                padding: 5px 15px;
+                left: 10px;
+                padding: 2px 8px;
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
                     stop:0 #2ecc71, stop:1 #27ae60);
-                border-radius: 8px;
+                border-radius: 5px;
             }
             QLabel {
-                font-size: 16px;
+                font-size: 12px;
                 color: #ffffff;
                 background: transparent;
             }
         """)
         ui_layout = QFormLayout(ui_group)
-        ui_layout.setSpacing(18)
-        ui_layout.setContentsMargins(20, 30, 20, 20)
+        ui_layout.setSpacing(8)
+        ui_layout.setContentsMargins(10, 20, 10, 10)
         
         # Theme
         self.theme_combo = QComboBox()
@@ -232,61 +232,61 @@ class SettingsScreen(QWidget):
         
         # Button size
         self.button_size_spin = QSpinBox()
-        self.button_size_spin.setRange(100, 300)
+        self.button_size_spin.setRange(80, 200)
         self.button_size_spin.setSuffix(" px")
         self.button_size_spin.setSingleStep(10)
-        ui_layout.addRow("Button-Größe:", self.button_size_spin)
+        ui_layout.addRow("Button:", self.button_size_spin)
         
         # Blur radius
         self.blur_spin = QSpinBox()
         self.blur_spin.setRange(5, 50)
         self.blur_spin.setSuffix(" px")
-        ui_layout.addRow("Blur-Stärke:", self.blur_spin)
+        ui_layout.addRow("Blur:", self.blur_spin)
         
         # Show settings button
-        self.show_settings_check = QCheckBox("Einstellungs-Button anzeigen")
+        self.show_settings_check = QCheckBox("Settings-Button")
         ui_layout.addRow("", self.show_settings_check)
         
         content_layout.addWidget(ui_group)
         
         # Storage group
-        storage_group = QGroupBox("💾 Speicherung")
+        storage_group = QGroupBox("💾 Speicher")
         storage_group.setStyleSheet("""
             QGroupBox {
-                font-size: 20px;
+                font-size: 13px;
                 font-weight: bold;
                 color: #ffffff;
                 background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
                     stop:0 rgba(15, 52, 96, 0.9), stop:1 rgba(22, 33, 62, 0.9));
                 border: 2px solid rgba(52, 152, 219, 0.4);
-                border-radius: 15px;
-                margin-top: 25px;
-                padding: 20px 15px 15px 15px;
+                border-radius: 8px;
+                margin-top: 16px;
+                padding: 8px 8px 8px 8px;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
-                left: 20px;
-                padding: 5px 15px;
+                left: 10px;
+                padding: 2px 8px;
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
                     stop:0 #3498db, stop:1 #2980b9);
-                border-radius: 8px;
+                border-radius: 5px;
             }
             QLabel {
-                font-size: 16px;
+                font-size: 12px;
                 color: #ffffff;
                 background: transparent;
             }
         """)
         storage_layout = QFormLayout(storage_group)
-        storage_layout.setSpacing(18)
-        storage_layout.setContentsMargins(20, 30, 20, 20)
+        storage_layout.setSpacing(8)
+        storage_layout.setContentsMargins(10, 20, 10, 10)
         
         self.save_locally_check = QCheckBox("Lokal speichern")
         storage_layout.addRow("", self.save_locally_check)
         
         self.photos_dir_edit = QLineEdit()
         self.photos_dir_edit.setPlaceholderText("~/Pictures/PiBox5")
-        storage_layout.addRow("Speicherort:", self.photos_dir_edit)
+        storage_layout.addRow("Pfad:", self.photos_dir_edit)
         
         content_layout.addWidget(storage_group)
         
@@ -301,7 +301,7 @@ class SettingsScreen(QWidget):
         tab = QWidget()
         tab.setStyleSheet("background: transparent;")
         layout = QVBoxLayout(tab)
-        layout.setSpacing(20)
+        layout.setSpacing(10)
         
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
@@ -318,40 +318,40 @@ class SettingsScreen(QWidget):
         content = QWidget()
         content.setStyleSheet("background: transparent;")
         content_layout = QVBoxLayout(content)
-        content_layout.setSpacing(20)
-        content_layout.setContentsMargins(5, 10, 5, 10)
+        content_layout.setSpacing(10)
+        content_layout.setContentsMargins(3, 5, 3, 5)
         
         # Camera settings group
-        camera_group = QGroupBox("📷 Kamera-Einstellungen")
+        camera_group = QGroupBox("📷 Kamera")
         camera_group.setStyleSheet("""
             QGroupBox {
-                font-size: 20px;
+                font-size: 13px;
                 font-weight: bold;
                 color: #ffffff;
                 background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
                     stop:0 rgba(15, 52, 96, 0.9), stop:1 rgba(22, 33, 62, 0.9));
                 border: 2px solid rgba(155, 89, 182, 0.4);
-                border-radius: 15px;
-                margin-top: 25px;
-                padding: 20px 15px 15px 15px;
+                border-radius: 8px;
+                margin-top: 16px;
+                padding: 8px 8px 8px 8px;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
-                left: 20px;
-                padding: 5px 15px;
+                left: 10px;
+                padding: 2px 8px;
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
                     stop:0 #9b59b6, stop:1 #8e44ad);
-                border-radius: 8px;
+                border-radius: 5px;
             }
             QLabel {
-                font-size: 16px;
+                font-size: 12px;
                 color: #ffffff;
                 background: transparent;
             }
         """)
         camera_layout = QFormLayout(camera_group)
-        camera_layout.setSpacing(18)
-        camera_layout.setContentsMargins(20, 30, 20, 20)
+        camera_layout.setSpacing(8)
+        camera_layout.setContentsMargins(10, 20, 10, 10)
         
         # ISO
         self.iso_combo = QComboBox()
@@ -366,50 +366,50 @@ class SettingsScreen(QWidget):
         # Shutter speed
         self.shutter_combo = QComboBox()
         self.shutter_combo.addItems(["auto", "1/30", "1/60", "1/125", "1/250", "1/500"])
-        camera_layout.addRow("Verschlusszeit:", self.shutter_combo)
+        camera_layout.addRow("Shutter:", self.shutter_combo)
         
         # Preview FPS
         self.fps_spin = QSpinBox()
         self.fps_spin.setRange(5, 30)
         self.fps_spin.setSuffix(" FPS")
-        camera_layout.addRow("Vorschau-FPS:", self.fps_spin)
+        camera_layout.addRow("Preview:", self.fps_spin)
         
         content_layout.addWidget(camera_group)
         
         # Debug group
-        debug_group = QGroupBox("🔧 Entwicklung")
+        debug_group = QGroupBox("🔧 Debug")
         debug_group.setStyleSheet("""
             QGroupBox {
-                font-size: 20px;
+                font-size: 13px;
                 font-weight: bold;
                 color: #ffffff;
                 background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
                     stop:0 rgba(15, 52, 96, 0.9), stop:1 rgba(22, 33, 62, 0.9));
                 border: 2px solid rgba(241, 196, 15, 0.4);
-                border-radius: 15px;
-                margin-top: 25px;
-                padding: 20px 15px 15px 15px;
+                border-radius: 8px;
+                margin-top: 16px;
+                padding: 8px 8px 8px 8px;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
-                left: 20px;
-                padding: 5px 15px;
+                left: 10px;
+                padding: 2px 8px;
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
                     stop:0 #f1c40f, stop:1 #f39c12);
-                border-radius: 8px;
+                border-radius: 5px;
                 color: #1a1a2e;
             }
             QLabel {
-                font-size: 16px;
+                font-size: 12px;
                 color: #ffffff;
                 background: transparent;
             }
         """)
         debug_layout = QFormLayout(debug_group)
-        debug_layout.setSpacing(18)
-        debug_layout.setContentsMargins(20, 30, 20, 20)
+        debug_layout.setSpacing(8)
+        debug_layout.setContentsMargins(10, 20, 10, 10)
         
-        self.dummy_camera_check = QCheckBox("Dummy-Kamera verwenden (Test)")
+        self.dummy_camera_check = QCheckBox("Dummy-Kamera (Test)")
         debug_layout.addRow("", self.dummy_camera_check)
         
         content_layout.addWidget(debug_group)
@@ -425,7 +425,7 @@ class SettingsScreen(QWidget):
         tab = QWidget()
         tab.setStyleSheet("background: transparent;")
         layout = QVBoxLayout(tab)
-        layout.setSpacing(20)
+        layout.setSpacing(10)
         
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
@@ -442,71 +442,71 @@ class SettingsScreen(QWidget):
         content = QWidget()
         content.setStyleSheet("background: transparent;")
         content_layout = QVBoxLayout(content)
-        content_layout.setSpacing(20)
-        content_layout.setContentsMargins(5, 10, 5, 10)
+        content_layout.setSpacing(10)
+        content_layout.setContentsMargins(3, 5, 3, 5)
         
         # Upload settings group
-        upload_group = QGroupBox("☁️ Upload-Einstellungen")
+        upload_group = QGroupBox("☁️ Upload")
         upload_group.setStyleSheet("""
             QGroupBox {
-                font-size: 20px;
+                font-size: 13px;
                 font-weight: bold;
                 color: #ffffff;
                 background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
                     stop:0 rgba(15, 52, 96, 0.9), stop:1 rgba(22, 33, 62, 0.9));
                 border: 2px solid rgba(26, 188, 156, 0.4);
-                border-radius: 15px;
-                margin-top: 25px;
-                padding: 20px 15px 15px 15px;
+                border-radius: 8px;
+                margin-top: 16px;
+                padding: 8px 8px 8px 8px;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
-                left: 20px;
-                padding: 5px 15px;
+                left: 10px;
+                padding: 2px 8px;
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
                     stop:0 #1abc9c, stop:1 #16a085);
-                border-radius: 8px;
+                border-radius: 5px;
             }
             QLabel {
-                font-size: 16px;
+                font-size: 12px;
                 color: #ffffff;
                 background: transparent;
             }
         """)
         upload_layout = QFormLayout(upload_group)
-        upload_layout.setSpacing(18)
-        upload_layout.setContentsMargins(20, 30, 20, 20)
+        upload_layout.setSpacing(8)
+        upload_layout.setContentsMargins(10, 20, 10, 10)
         
         # Enable upload
-        self.upload_enabled_check = QCheckBox("Upload aktivieren")
+        self.upload_enabled_check = QCheckBox("Aktivieren")
         upload_layout.addRow("", self.upload_enabled_check)
         
         # URL
         self.upload_url_edit = QLineEdit()
-        self.upload_url_edit.setPlaceholderText("https://api.example.com/upload")
-        upload_layout.addRow("API-URL:", self.upload_url_edit)
+        self.upload_url_edit.setPlaceholderText("https://...")
+        upload_layout.addRow("URL:", self.upload_url_edit)
         
         # API Key
         self.api_key_edit = QLineEdit()
-        self.api_key_edit.setPlaceholderText("Ihr API-Schlüssel")
+        self.api_key_edit.setPlaceholderText("API-Key")
         self.api_key_edit.setEchoMode(QLineEdit.EchoMode.Password)
-        upload_layout.addRow("API-Key:", self.api_key_edit)
+        upload_layout.addRow("Key:", self.api_key_edit)
         
         # Auto upload
-        self.auto_upload_check = QCheckBox("Automatisch nach Aufnahme hochladen")
+        self.auto_upload_check = QCheckBox("Auto-Upload")
         upload_layout.addRow("", self.auto_upload_check)
         
         # Timeout
         self.timeout_spin = QSpinBox()
         self.timeout_spin.setRange(5, 120)
-        self.timeout_spin.setSuffix(" Sekunden")
+        self.timeout_spin.setSuffix(" s")
         upload_layout.addRow("Timeout:", self.timeout_spin)
         
         # Retry count
         self.retry_spin = QSpinBox()
         self.retry_spin.setRange(0, 10)
-        self.retry_spin.setSuffix(" Versuche")
-        upload_layout.addRow("Wiederholungen:", self.retry_spin)
+        self.retry_spin.setSuffix(" x")
+        upload_layout.addRow("Retry:", self.retry_spin)
         
         content_layout.addWidget(upload_group)
         content_layout.addStretch()
