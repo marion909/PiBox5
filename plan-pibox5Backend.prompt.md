@@ -1,45 +1,56 @@
-# Plan: PiBox5 Backend mit API-Key Auth
+# Plan: PiBox5 Backend mit PHP
 
-Ein FastAPI-Backend für Foto-Uploads, gehostet unter `pibox5.neuhauser.cloud`.
+Ein einfaches PHP-Backend für Foto-Uploads mit API-Key-Authentifizierung und Web-Galerie, gehostet unter `pibox5.neuhauser.cloud`.
 
 ## Projektstruktur
 
 ```
 backend/
-├── requirements.txt       # FastAPI, uvicorn, python-multipart
-├── .env.example          # Template für Umgebungsvariablen
-├── config.py             # Settings mit Pydantic
-├── main.py               # FastAPI App
-├── auth.py               # API-Key Validierung
-├── models.py             # Pydantic Models
+├── .htaccess             # URL-Rewriting, Sicherheit
+├── config.php            # API-Key und Einstellungen
+├── upload.php            # Upload-Endpoint (POST)
+├── gallery.php           # Web-Galerie (HTML)
+├── api/
+│   └── photos.php        # JSON-API für Foto-Liste
 └── uploads/              # Gespeicherte Fotos
+    └── .htaccess         # Direktzugriff erlauben
 ```
 
 ## Steps
 
-1. **Erstelle `backend/requirements.txt`** mit FastAPI, uvicorn, python-multipart, Pillow, aiofiles
+1. **Erstelle `config.php`** mit:
+   - `API_KEY`: Einziger erlaubter API-Key
+   - `UPLOAD_DIR`: Pfad zum Upload-Ordner
+   - `MAX_FILE_SIZE`: Maximale Dateigröße (z.B. 10MB)
+   - `ALLOWED_TYPES`: Erlaubte MIME-Types (image/jpeg)
 
-2. **Erstelle `backend/config.py`** mit Pydantic Settings für:
-   - `API_KEYS`: Liste erlaubter API-Keys
-   - `UPLOAD_DIR`: Speicherort für Fotos
-   - `MAX_FILE_SIZE`: Maximale Dateigröße
+2. **Erstelle `upload.php`** mit:
+   - Prüft `X-API-Key` Header gegen `API_KEY`
+   - Empfängt `multipart/form-data` mit `photo` Feld
+   - Validiert Dateityp und -größe
+   - Speichert mit Zeitstempel-Dateiname
+   - Gibt JSON-Response zurück
 
-3. **Erstelle `backend/auth.py`** mit:
-   - `verify_api_key()` Dependency für FastAPI
-   - Prüft `X-API-Key` Header gegen erlaubte Keys
+3. **Erstelle `gallery.php`** mit:
+   - Responsive HTML/CSS Galerie
+   - Thumbnail-Grid aller Fotos
+   - Lightbox für Vollbild-Ansicht
+   - Sortierung nach Datum (neueste zuerst)
+   - Download-Button
 
-4. **Erstelle `backend/main.py`** mit:
-   - `POST /upload` - Foto empfangen und speichern
-   - `GET /photos` - Liste aller Fotos (optional)
-   - `GET /health` - Health-Check Endpoint
-   - CORS für Frontend-Zugriff
+4. **Erstelle `.htaccess`** mit:
+   - RewriteRule für saubere URLs
+   - Sicherheits-Header
+   - PHP-Einstellungen (upload_max_filesize)
 
-5. **Deployment-Config** für `pibox5.neuhauser.cloud`:
-   - Systemd Service oder Docker
-   - Nginx Reverse Proxy mit SSL
+5. **Deployment** auf `pibox5.neuhauser.cloud`:
+   - Dateien per FTP/SSH hochladen
+   - Upload-Ordner erstellen mit Schreibrechten (chmod 755)
+   - API-Key in config.php setzen
 
-## Weitere Überlegungen
+## Technologie-Stack
 
-1. **API-Key Management**: Sollen mehrere Keys erlaubt sein? (z.B. pro Fotobox)
-2. **Speicher**: Lokaler Ordner oder Cloud-Storage (S3)?
-3. **Galerie**: Soll eine Web-Galerie zum Ansehen der Fotos erstellt werden?
+- **PHP 8.x** - Serverseitige Logik
+- **HTML5/CSS3** - Galerie-Frontend
+- **Vanilla JS** - Lightbox-Funktionalität
+- **Lokaler Storage** - Fotos im `uploads/` Ordner

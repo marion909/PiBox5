@@ -1,0 +1,23 @@
+# Allow direct access to uploaded images
+# This file should be in the uploads/ directory
+
+# Enable directory access for images
+Options -Indexes
+
+# Allow all file types in this directory
+<Files "*">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Cache images for 1 month
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 month"
+</IfModule>
+
+# Prevent PHP execution in uploads folder (security)
+<FilesMatch "\.php$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
