@@ -104,10 +104,11 @@ install_dependencies() {
         gphoto2
         libgphoto2-dev
         
-        # Qt6 dependencies
-        libgl1-mesa-glx
-        libgles2-mesa
-        libegl1-mesa
+        # Qt6/OpenGL dependencies (Bookworm compatible)
+        libgl1
+        libglx-mesa0
+        libegl1
+        libgles2
         libxcb-xinerama0
         libxcb-cursor0
         libxkbcommon-x11-0
@@ -122,6 +123,14 @@ install_dependencies() {
         
         # Fonts
         fonts-dejavu-core
+        
+        # Additional Qt dependencies
+        libxcb-icccm4
+        libxcb-image0
+        libxcb-keysyms1
+        libxcb-randr0
+        libxcb-render-util0
+        libxcb-shape0
     )
     
     print_msg "Installing: ${PACKAGES[*]}" "${YELLOW}"
