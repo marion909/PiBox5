@@ -68,7 +68,7 @@ class GPhoto2Camera(CameraBase):
             
             # Detect and initialize camera
             self._camera = gp.Camera()
-            self._camera.init(self._context)
+            self._camera.init()
             
             # Get camera info
             abilities = self._camera.get_abilities()
@@ -76,7 +76,7 @@ class GPhoto2Camera(CameraBase):
             
             # Try to get serial number
             try:
-                config = self._camera.get_config(self._context)
+                config = self._camera.get_config()
                 serial_widget = config.get_child_by_name("serialnumber")
                 self._serial = serial_widget.get_value()
             except gp.GPhoto2Error:
@@ -95,7 +95,7 @@ class GPhoto2Camera(CameraBase):
         """Disconnect from the camera."""
         if self._camera is not None:
             try:
-                self._camera.exit(self._context)
+                self._camera.exit()
             except gp.GPhoto2Error:
                 pass
             self._camera = None
@@ -116,8 +116,9 @@ class GPhoto2Camera(CameraBase):
             return None
         
         try:
-            # Capture preview image
-            camera_file = self._camera.capture_preview(self._context)
+            # Capture preview image - create CameraFile first
+            camera_file = gp.CameraFile()
+            self._camera.capture_preview(camera_file)
             
             # Get file data
             file_data = camera_file.get_data_and_size()
@@ -154,15 +155,16 @@ class GPhoto2Camera(CameraBase):
             print("[GPhoto2] Capturing photo...")
             
             # Capture image
-            file_path = self._camera.capture(gp.GP_CAPTURE_IMAGE, self._context)
+            file_path = self._camera.capture(gp.GP_CAPTURE_IMAGE)
             print(f"[GPhoto2] Captured: {file_path.folder}/{file_path.name}")
             
             # Download file from camera
-            camera_file = self._camera.file_get(
+            camera_file = gp.CameraFile()
+            self._camera.file_get(
                 file_path.folder,
                 file_path.name,
                 gp.GP_FILE_TYPE_NORMAL,
-                self._context,
+                camera_file,
             )
             
             # Get image data
@@ -173,7 +175,6 @@ class GPhoto2Camera(CameraBase):
                 self._camera.file_delete(
                     file_path.folder,
                     file_path.name,
-                    self._context,
                 )
             except gp.GPhoto2Error:
                 pass  # Some cameras don't support deletion
@@ -209,7 +210,7 @@ class GPhoto2Camera(CameraBase):
             config_path = name  # Use name directly if not in mapping
         
         try:
-            config = self._camera.get_config(self._context)
+            config = self._camera.get_config()
             widget = config.get_child_by_name(config_path.split("/")[-1])
             
             # Get current value
@@ -250,7 +251,7 @@ class GPhoto2Camera(CameraBase):
             config_path = name
         
         try:
-            config = self._camera.get_config(self._context)
+            config = self._camera.get_config()
             widget = config.get_child_by_name(config_path.split("/")[-1])
             
             # Check if readonly
@@ -260,7 +261,7 @@ class GPhoto2Camera(CameraBase):
             
             # Set value
             widget.set_value(value)
-            self._camera.set_config(config, self._context)
+            self._camera.set_config(config)
             
             print(f"[GPhoto2] Set {name} = {value}")
             return True
@@ -275,7 +276,7 @@ class GPhoto2Camera(CameraBase):
             return []
         
         try:
-            config = self._camera.get_config(self._context)
+            config = self._camera.get_config()
             configs = []
             self._list_config_recursive(config, configs)
             return configs
