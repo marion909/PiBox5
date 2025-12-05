@@ -596,3 +596,8 @@ class SettingsScreen(QWidget):
     def _on_cancel(self):
         """Handle cancel button click."""
         self.settings_closed.emit()
+    
+    def refresh_settings(self, settings: Settings):
+        """Apply new settings and reload UI."""
+        self.settings = settings
+        self._load_settings()

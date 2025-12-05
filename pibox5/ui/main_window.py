@@ -278,6 +278,16 @@ class MainWindow(QMainWindow):
         self.settings = new_settings
         save_settings(self.settings)
         
+        # Update all screens with new settings
+        self.idle_screen.refresh_settings(self.settings)
+        self.countdown_screen.refresh_settings(self.settings)
+        self.review_screen.refresh_settings(self.settings)
+        self.settings_screen.refresh_settings(self.settings)
+        
+        # Update camera preview FPS if changed
+        if self.camera_thread:
+            self.camera_thread.fps = self.settings.camera.preview_fps
+        
         # Reload theme if changed
         from pibox5.app import load_theme, get_app
         app = get_app()
@@ -286,6 +296,8 @@ class MainWindow(QMainWindow):
         
         # Reconfigure uploader
         self._setup_uploader()
+        
+        print(f"[MainWindow] Settings applied: countdown={self.settings.timing.countdown_seconds}s, review={self.settings.timing.review_seconds}s")
         
         self.screen_stack.setCurrentIndex(self.SCREEN_IDLE)
     
