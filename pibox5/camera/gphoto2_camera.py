@@ -138,6 +138,65 @@ class GPhoto2Camera(CameraBase):
             print(f"[GPhoto2] Preview capture failed: {e}")
             return None
     
+    def _trigger_autofocus(self) -> bool:
+        """
+        Trigger autofocus on the camera.
+        
+        Returns:
+            True if autofocus was triggered successfully.
+        """
+        if not self._connected or self._camera is None:
+            return False
+        
+        try:
+            # Get camera config
+            config = self._camera.get_config()
+            
+            # Try different autofocus trigger methods
+            # Method 1: Use autofocusdrive (Canon)
+            try:
+                af_widget = config.get_child_by_name("autofocusdrive")
+                af_widget.set_value(1)
+                self._camera.set_config(config)
+                print("[GPhoto2] Autofocus triggered (autofocusdrive)")
+                
+                # Wait for focus to complete
+                import time
+                time.sleep(0.5)
+                return True
+            except gp.GPhoto2Error:
+                pass
+            
+            # Method 2: Use eosremoterelease (Canon EOS)
+            try:
+                config = self._camera.get_config()  # Refresh config
+                release_widget = config.get_child_by_name("eosremoterelease")
+                # Press halfway to trigger AF
+                release_widget.set_value("Press Half")
+                self._camera.set_config(config)
+                
+                import time
+                time.sleep(0.8)  # Wait for AF
+                
+                # Release
+                config = self._camera.get_config()
+                release_widget = config.get_child_by_name("eosremoterelease")
+                release_widget.set_value("Release Full")
+                self._camera.set_config(config)
+                
+                print("[GPhoto2] Autofocus triggered (eosremoterelease)")
+                return True
+            except gp.GPhoto2Error:
+                pass
+            
+            # Method 3: Use capture target with AF
+            print("[GPhoto2] No direct AF control, relying on camera AF mode")
+            return False
+            
+        except gp.GPhoto2Error as e:
+            print(f"[GPhoto2] Autofocus failed: {e}")
+            return False
+    
     def capture_photo(self) -> CaptureResult:
         """
         Capture a full-resolution photo.
@@ -153,6 +212,9 @@ class GPhoto2Camera(CameraBase):
         
         try:
             print("[GPhoto2] Capturing photo...")
+            
+            # Trigger autofocus before capture
+            self._trigger_autofocus()
             
             # Capture image
             file_path = self._camera.capture(gp.GP_CAPTURE_IMAGE)
